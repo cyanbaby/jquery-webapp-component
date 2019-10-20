@@ -1,12 +1,98 @@
 /*公共样式*/
-	.container { /*站点导航*/
-		width: 1200px;
-		margin: 0 auto;
-	}
-	a.link { /*链接正常颜色*/
-		color: #4d555d;
-	}
-	a.link:hover {   /*链接经过颜色*/
-		color: #f01414 !important;
-	}
-	
+
+.container {
+    /*站点导航*/
+    width: 1200px;
+    margin: 0 auto;
+}
+
+a.link {
+    /*链接正常颜色*/
+    color: #4d555d;
+}
+
+a.link:hover {
+    /*链接经过颜色*/
+    color: #f01414 !important;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    position: relative;
+    z-index: 2;
+}
+
+.dropdown-arrow {
+    display: inline-block;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+}
+
+.dropdown-layer {
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+
+.dropdown-left {
+    left: 0;
+    right: auto;
+}
+
+.dropdown-right {
+    right: 0;
+    left: auto;
+}
+
+
+/*.menu .dropdown*/
+
+.menu .dropdown-toggle {
+    display: block;
+    height: 100%;
+    padding: 0 16px 0 12px;
+    border-left: 1px solid #f3f5f7;
+    border-right: 1px solid #f3f5f7;
+}
+
+.menu .dropdown-arrow {
+    width: 8px;
+    height: 6px;
+    background-image: url(../img/dropdown-arrow.png);
+    margin-left: 8px;
+}
+
+.menu .dropdown-layer {
+    top: 43px;
+    background-color: #fff;
+    border: 1px solid #cdd0d4;
+}
+
+.menu-item {
+    display: block;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 12px;
+    color: #4d555d;
+    white-space: nowrap;
+}
+
+.menu-item:hover {
+    background-color: #f3f5f7;
+}
+
+.menu-active .dropdown-toggle {
+    background-color: #fff;
+    border-color: #cdd0d4;
+}
+
+.menu-active .dropdown-arrow {
+    background-image: url(../img/dropdown-arrow-active.png);
+}
+
+.menu-active .dropdown-layer {
+    display: block;
+}

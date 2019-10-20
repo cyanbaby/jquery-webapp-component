@@ -30,3 +30,7 @@
 // });
 
 // 第三种方法，不使用js, 直接使用css中的hover实现
+
+
+//封装dropdown后引用
+$(".dropdown").dropdown();

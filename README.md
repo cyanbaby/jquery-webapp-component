@@ -1,6 +1,6 @@
 # jquery-webapp-component
 
-> 慕淘网之下拉菜单组件化--分步代码：1-1 分离共性和特性，dropdown.html
+> 慕淘网之下拉菜单组件化--分步代码：1-2 让下拉菜单开始工作
 
 ## Build Setup
 

@@ -72,19 +72,16 @@
         background-color: #f3f5f7;
     }
 
-    .menu.dropdown-active .dropdown-toggle,
-    .menu.dropdown:hover .dropdown-toggle {
+    .menu-active .dropdown-toggle {
         background-color: #fff;
         border-color: #cdd0d4;
     }
 
-    .menu.dropdown-active .dropdown-arrow,
-    .menu.dropdown:hover .dropdown-arrow {
+    .menu-active .dropdown-arrow {
         background-image: url(../img/dropdown-arrow-active.png);
     }
 
-    .menu.dropdown-active .dropdown-layer,
-    .menu.dropdown:hover .dropdown-layer {
+    .menu-active .dropdown-layer {
         display: block;
     }
     </style>
@@ -98,7 +95,15 @@
             
         </div>
     </div> -->
-    <div class="menu dropdown">
+    <div class="menu dropdown fl" data-active="menu">
+        <a class="dropdown-toggle">我的慕淘<i class="dropdown-arrow"></i></a>
+        <ul class="dropdown-layer dropdown-left">
+            <li><a href="###" target="_blank" class="menu-item">已买到的宝贝</a></li>
+            <li><a href="###" target="_blank" class="menu-item">我的足迹</a></li>
+        </ul>
+    </div>
+
+    <div class="menu dropdown fl" data-active="menu">
         <a class="dropdown-toggle">我的慕淘<i class="dropdown-arrow"></i></a>
         <ul class="dropdown-layer dropdown-left">
             <li><a href="###" target="_blank" class="menu-item">已买到的宝贝</a></li>
@@ -106,12 +111,68 @@
         </ul>
     </div>
     <script src="../js/jquery.js"></script>
+    <script src="../js/dropdown.js"></script>
     <script type="text/javascript">
-    $('.dropdown').hover(function() {
-        $(this).addClass('dropdown-active');
-    }, function() {
-        $(this).removeClass('dropdown-active');
-    });
+    // -----简单写法-----
+    // $('.dropdown').hover(function() {
+    // 	var $this=$(this); // 缓存this，以避免重复加载
+    //     $this.addClass($this.data('active')+'-active');
+    // }, function() {
+    // 	var $this=$(this);
+    //     $this.removeClass($this.data('active')+'-active');
+    // });
+
+
+
+    //------封装代码方式--------
+     //   function dropdown(elem) {
+     //    var $elem = $(elem),
+     //        activeClass = $elem.data('active') + '-active';
+     //    $elem.hover(function() {
+     //        $elem.addClass(activeClass);
+     //    }, function() {
+     //        $elem.removeClass(activeClass);
+     //    });
+
+     // }
+    //单个下拉菜单 dropdown($('.dropdown')[0])
+
+    //多个下拉菜单 
+
+    // $('.dropdown').each(function(){
+    // 	dropdown($(this));
+    // });
+
+
+
+    // ------插件方式-------
+
+    // function dropdown(elem) {
+    //     var $elem = $(elem),
+    //         activeClass = $elem.data('active') + '-active';
+    //     $elem.hover(function() {
+    //         $elem.addClass(activeClass);
+    //     }, function() {
+    //         $elem.removeClass(activeClass);
+    //     });
+
+    //  }
+
+    // $.fn.extend({
+    // 	dropdown:function(){
+    // 		return this.each(function(){
+    // 			dropdown(this);
+
+    // 		});
+
+    // 	}
+    // });
+
+    // $('.dropdown').dropdown(); // 插件为了更好的调用
+
+
+    $('.dropdown').dropdown(); //模块封装，调用dropdown.js下的方法
+
     </script>
 </body>
 
