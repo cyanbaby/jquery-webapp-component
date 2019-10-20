@@ -1,6 +1,6 @@
 # jquery-webapp-component
 
-> 初始化项目
+> 慕淘网之站点导航实现--分步代码
 
 ## Build Setup
 
