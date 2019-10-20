@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>下拉菜单组件</title>
+    <link rel="stylesheet" href="../css/base.css" />
+    <style type="text/css">
+    .dropdown {
+        position: relative;
+    }
+
+    .dropdown-toggle {
+        position: relative;
+        z-index: 2;
+    }
+
+    .dropdown-arrow {
+        display: inline-block;
+        background-repeat: no-repeat;
+        vertical-align: middle;
+    }
+
+    .dropdown-layer {
+        display: none;
+        position: absolute;
+        z-index: 1;
+    }
+
+    .dropdown-left {
+        left: 0;
+        right: auto;
+    }
+
+    .dropdown-right {
+        right: 0;
+        left: auto;
+    }
+    /*.menu .dropdown*/
+
+    .menu .dropdown-toggle {
+        display: block;
+        height: 100%;
+        padding: 0 16px 0 12px;
+        border-left: 1px solid #f3f5f7;
+        border-right: 1px solid #f3f5f7;
+    }
+
+    .menu .dropdown-arrow {
+        width: 8px;
+        height: 6px;
+        background-image: url(../img/dropdown-arrow.png);
+        margin-left: 8px;
+    }
+
+    .menu .dropdown-layer {
+        top: 100%;
+        background-color: #fff;
+        border: 1px solid #cdd0d4;
+    }
+
+    .menu-item {
+        display: block;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 12px;
+        color: #4d555d;
+        white-space: nowrap;
+    }
+
+    .menu-item:hover {
+        background-color: #f3f5f7;
+    }
+
+    .menu.dropdown-active .dropdown-toggle,
+    .menu.dropdown:hover .dropdown-toggle {
+        background-color: #fff;
+        border-color: #cdd0d4;
+    }
+
+    .menu.dropdown-active .dropdown-arrow,
+    .menu.dropdown:hover .dropdown-arrow {
+        background-image: url(../img/dropdown-arrow-active.png);
+    }
+
+    .menu.dropdown-active .dropdown-layer,
+    .menu.dropdown:hover .dropdown-layer {
+        display: block;
+    }
+    </style>
+</head>
+
+<body>
+    <!--   通用html代码
+    <div class="menu dropdown">
+        <div class="dropdown-toggle">我的慕淘<i class="dropdown-arrow"></i></a>
+        <div class="dropdown-layer dropdown-left">
+            
+        </div>
+    </div> -->
+    <div class="menu dropdown">
+        <a class="dropdown-toggle">我的慕淘<i class="dropdown-arrow"></i></a>
+        <ul class="dropdown-layer dropdown-left">
+            <li><a href="###" target="_blank" class="menu-item">已买到的宝贝</a></li>
+            <li><a href="###" target="_blank" class="menu-item">我的足迹</a></li>
+        </ul>
+    </div>
+    <script src="../js/jquery.js"></script>
+    <script type="text/javascript">
+    $('.dropdown').hover(function() {
+        $(this).addClass('dropdown-active');
+    }, function() {
+        $(this).removeClass('dropdown-active');
+    });
+    </script>
+</body>
+
+</html>

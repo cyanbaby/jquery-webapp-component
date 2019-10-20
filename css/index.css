@@ -77,6 +77,8 @@
 	background-color: #f3f5f7;
 }
 
+/*下拉菜单通过js和css来实现dropdown*/
+
 .dropdown-active .dropdown-toggle,
 .dropdown:hover .dropdown-toggle{
 	background-color:#fff;
