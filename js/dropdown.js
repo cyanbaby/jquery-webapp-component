@@ -1,7 +1,5 @@
 (function($){
-    'use strict';
-
-    function dropdown(elem) {
+function dropdown(elem) {
         var $elem = $(elem),
             activeClass = $elem.data('active') + '-active';
         $elem.hover(function() {
@@ -10,7 +8,7 @@
             $elem.removeClass(activeClass);
         });
 
-     };
+     }
 
     $.fn.extend({
         dropdown:function(){
