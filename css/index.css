@@ -39,9 +39,9 @@
 }
 .dropdown-arrow{
 	display: inline-block;
-	width:8px;
-	height:6px;
-	background: url(../img/dropdown-arrow.png) no-repeat;
+	/*width:8px;
+	height:6px;*/
+	/*background: url(../img/dropdown-arrow.png) no-repeat;*/
 	margin-left:8px;
 	vertical-align: middle;
 
@@ -79,7 +79,7 @@
 
 /*下拉菜单通过js和css来实现dropdown*/
 
-.dropdown-active .dropdown-toggle,
+/*.dropdown-active .dropdown-toggle,
 .dropdown:hover .dropdown-toggle{
 	background-color:#fff;
     border-color:#cdd0d4;
@@ -92,4 +92,4 @@
 .dropdown-active .dropdown-layer,
 .dropdown:hover .dropdown-layer{
 	display:block;
-}
+}*/

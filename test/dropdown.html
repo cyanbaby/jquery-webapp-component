@@ -85,7 +85,8 @@
         display: block;
     }
 
-    .icon-triangle-down{
+    /* css 绘制箭头
+        .icon-triangle-down{
     	width:0px;
     	height:0px;
     	border:4px solid #535b62;
@@ -94,9 +95,18 @@
     	border-left-color: transparent;
     	_border-left-color:yellow;
     	border-bottom: none;
-    }
-    
-    @font-face {
+    }  
+
+
+
+    .menu-active .icon-triangle-down{
+    	border-top: none;
+    	border-bottom:4px solid #f11c1c;
+    }*/
+
+
+
+     @font-face {
 			font-family: "iconfont";
 			src: url('font/iconfont.eot?t=1477124206'); /* IE9*/
 			src: url('font/iconfont.eot?t=1477124206#iefix') format('embedded-opentype'), /* IE6-IE8 */
@@ -113,11 +123,34 @@
 			-moz-osx-font-smoothing: grayscale;
 		} 
 
+        /*单独菜单旋转*/
+	  /*  .menu-active .dropdown-arrow {  
+			-o-transform: rotate(180deg);
+			-ms-transform: rotate(180deg);
+			-moz-transform: rotate(180deg);
+			-webkit-transform: rotate(180deg);
+			transform: rotate(180deg);
+		}*/
 
-    .menu-active .icon-triangle-down{
-    	border-top: none;
-    	border-bottom:4px solid #f11c1c;
-    }
+		/*多菜单旋转*/
+
+		[class*="-active"] .dropdown-arrow {  
+			-o-transform: rotate(180deg);
+			-ms-transform: rotate(180deg);
+			-moz-transform: rotate(180deg);
+			-webkit-transform: rotate(180deg);
+			transform: rotate(180deg);
+
+			
+		}
+
+		.transition{
+			-o-transition:all 0.5s;
+			-ms-transition:all 0.5s;
+			-moz-transition:all 0.5s;
+			-webkit-transition:all 0.5s;
+			transition:all 0.5s;
+		}
     </style>
 </head>
 
@@ -138,7 +171,7 @@
     </div> -->
 
     <div class="menu dropdown fl" data-active="menu">
-        <a class="dropdown-toggle">我的慕淘<i class="dropdown-arrow icon">&#xe609;</i></a>
+        <a class="dropdown-toggle">我的慕淘<i class="dropdown-arrow icon transition">&#xe609;</i></a>
         <ul class="dropdown-layer dropdown-left">
             <li><a href="###" target="_blank" class="menu-item">已买到的宝贝</a></li>
             <li><a href="###" target="_blank" class="menu-item">我的足迹</a></li>
