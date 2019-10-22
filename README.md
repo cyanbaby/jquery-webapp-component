@@ -1,6 +1,6 @@
 # jquery-webapp-component
 
-> 慕淘网之下拉菜单组件化--分步代码：2-5 用css3实现淡入淡出效果(2)
+> 慕淘网之下拉菜单组件化--分步代码：2-6 transition.js模块
 
 ## Build Setup
 

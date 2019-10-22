@@ -1,3 +1,5 @@
+ var transition=window.mt.transition; // transition兼容解决，transition.js
+
  // 提取init公共部分
  function init($elem, hiddenCallback) {
 
@@ -119,7 +121,7 @@
 
          show: function($elem) {
              show($elem, function() {
-                 $elem.off('transitionend').one('transitionend', function() {
+                 $elem.off(transition.end).one(transition.end, function() {
                      $elem.data('status', 'shown').trigger('shown');
                  });
                  $elem.show();
@@ -144,7 +146,7 @@
 
          hide: function($elem) {
              hide($elem, function() {
-                 $elem.off('transitionend').one('transitionend', function() {
+                 $elem.off(transition.end).one(transition.end, function() {
                      $elem.hide();
                      $elem.data('status', 'hidden').trigger('hidden');
                  });

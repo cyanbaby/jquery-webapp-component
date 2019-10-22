@@ -47,10 +47,13 @@
     </div>
     <button class="btn">显示2</button>
     <script src="../js/jquery.js"></script>
+    <script src="../js/transition.js"></script>
     <script src="../js/showHide.js"></script>
     <script>
    
-    
+    console.log(window.mt.transition.end);
+    console.log(window.mt.transition.isSupport);
+
     var $box = $('#box');
     css3.fade.init($box);
     $('#btn-show').on('click', function() {
