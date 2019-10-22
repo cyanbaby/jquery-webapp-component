@@ -1,6 +1,6 @@
 # jquery-webapp-component
 
-> 慕淘网之下拉菜单组件化--分步代码：2-6 transition.js模块
+> 慕淘网之下拉菜单组件化--分步代码：2-7 CSS3实现其他显示隐藏效果
 
 ## Build Setup
 

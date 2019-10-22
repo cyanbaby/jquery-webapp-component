@@ -1,4 +1,4 @@
- var transition=window.mt.transition; // transition兼容解决，transition.js
+ var transition = window.mt.transition; // transition兼容解决，transition.js
 
  // 提取init公共部分
  function init($elem, hiddenCallback) {
@@ -83,6 +83,7 @@
  // 带效果的显示和隐藏，css3实现方法
  var css3 = {
 
+
      fade: { // 淡入淡出
          // init: function($elem) {
          //    $elem.addClass('transition');
@@ -95,12 +96,16 @@
 
          // 提取公共init后，独有的内容
 
-         init: function($elem) {
-             $elem.addClass('transition');
-             init($elem, function() {
-                 $elem.addClass('fadeOut');
+         // init: function($elem) {
+         //     $elem.addClass('transition');
+         //     init($elem, function() {
+         //         $elem.addClass('fadeOut');
 
-             });
+         //     });
+
+
+         init: function($elem) {
+             css3._init($elem, 'fadeOut');
 
          },
          // show: function($elem) {
@@ -120,16 +125,7 @@
          // },
 
          show: function($elem) {
-             show($elem, function() {
-                 $elem.off(transition.end).one(transition.end, function() {
-                     $elem.data('status', 'shown').trigger('shown');
-                 });
-                 $elem.show();
-                 setTimeout(function() {
-                     $elem.removeClass('fadeOut');
-                 }, 20);
-             });
-
+             css3._show($elem, 'fadeOut');
 
          },
 
@@ -145,52 +141,112 @@
          // }
 
          hide: function($elem) {
-             hide($elem, function() {
-                 $elem.off(transition.end).one(transition.end, function() {
-                     $elem.hide();
-                     $elem.data('status', 'hidden').trigger('hidden');
-                 });
-                 $elem.addClass('fadeOut');
-
-             });
+             css3._hide($elem, 'fadeOut');
 
          }
 
      },
      slideUpDown: { // 上下滚动
-         show: function() {
+         // init: function($elem) {
+         //      $elem.height($elem.height());  //设置高度，解决没有slideUpDown的过程。
+         //      $elem.addClass('transition');
+         //      init($elem, function() {
+         //          $elem.addClass('slideUpDownCollapse');
+
+         //      });
+
+         init: function($elem) {
+             $elem.height($elem.height());
+             css3._init($elem, 'slideUpDownCollapse');
 
          },
-         hide: function() {
+         show: function($elem) {
+             css3._show($elem, 'slideUpDownCollapse');
 
+         },
+         hide: function($elem) {
+             css3._hide($elem, 'slideUpDownCollapse');
          }
      },
      slideLeftRight: { // 左右滚动
-         show: function() {
+         init: function($elem) {
+             $elem.width($elem.width());
+             css3._init($elem, 'slideLeftRightCollapse');
 
          },
-         hide: function() {
+         show: function($elem) {
+             css3._show($elem, 'slideLeftRightCollapse');
 
+         },
+         hide: function($elem) {
+             css3._hide($elem, 'slideLeftRightCollapse');
          }
      },
      fadeslideUpDown: { // 淡入淡出上下滚动
-         show: function() {
+         init: function($elem) {
+             $elem.height($elem.height());
+             css3._init($elem, 'fadeOut slideUpDownCollapse');
 
          },
-         hide: function() {
+         show: function($elem) {
+             css3._show($elem, 'fadeOut slideUpDownCollapse');
 
+         },
+         hide: function($elem) {
+             css3._hide($elem, 'fadeOut slideUpDownCollapse');
          }
      },
 
      fadeslideLeftRight: { // 淡入淡出左右滚动
-         show: function() {
+         init: function($elem) {
+             $elem.width($elem.width());
+             css3._init($elem, 'fadeOut slideLeftRightCollapse');
 
          },
-         hide: function() {
+         show: function($elem) {
+             css3._show($elem, 'fadeOut slideLeftRightCollapse');
 
+         },
+         hide: function($elem) {
+             css3._hide($elem, 'fadeOut slideLeftRightCollapse');
          }
      }
  };
+
+ css3._init = function($elem, className) {
+     $elem.addClass('transition');
+     init($elem, function() {
+         $elem.addClass(className);
+
+     });
+
+ };
+
+ css3._show = function($elem, className) {
+     show($elem, function() {
+         $elem.off(transition.end).one(transition.end, function() {
+             $elem.data('status', 'shown').trigger('shown');
+         });
+         $elem.show();
+         setTimeout(function() {
+             $elem.removeClass(className);
+         }, 20);
+     });
+
+
+ };
+
+ css3._hide = function($elem, className) {
+     hide($elem, function() {
+         $elem.off(transition.end).one(transition.end, function() {
+             $elem.hide();
+             $elem.data('status', 'hidden').trigger('hidden');
+         });
+         $elem.addClass(className);
+
+     });
+
+ }
 
  // 带效果的显示和隐藏，js实现方法
  var js = {
