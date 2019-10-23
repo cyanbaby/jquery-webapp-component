@@ -33,12 +33,52 @@
 
     //header search
     var $headerSearch = $('#header-search');
-    
+    var html = '',
+        maxNum = 10;
+
+        // 获得数据处理
+    $headerSearch.on('search-getData', function(e, data, $layer) {
+        var $this = $(this);
+        html = createHeaderSearchLayer(data, maxNum);
+        // 将生成的html呈现在页面中
+        $layer.html(html);
+        if (html) {
+            $this.search('showLayer');
+        } else {
+            $this.search('hideLayer');
+
+        }
+    }).on('search-noData', function(e, $layer) {
+        // 没获得数据处理
+        $(this).search('hideLayer');
+        $layer.html('');
+    }).on('click', '.search-layer-item', function() {
+        // 点击每项时，提交
+        $headerSearch.search('setInputVal', $(this).html());
+        $headerSearch.search('submit');
+    });
+
     $headerSearch.search({
         autocomplete: true,
         css3: false,
         js: false,
         animation: 'fade'
     });
+
+// 获取数据，生成html
+function createHeaderSearchLayer(data, maxNum) {
+        var html = '',
+            dataNum = data['result'].length;
+
+        if(dataNum === 0){
+            return '';
+        }
+        for (var i = 0; i < dataNum; i++) {
+            if (i >= maxNum) break;
+            html += '<li class="search-layer-item text-ellipsis">' + data['result'][i][0] + '</li>';
+        }
+        return html;
+
+    }
 
 })(jQuery);

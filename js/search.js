@@ -80,22 +80,23 @@
 
 // 面向对象方式实现搜索功能
 
-(function ($) {
+(function($) {
     'use strict';
 
- 
+
 
     function Search($elem, options) {
         this.$elem = $elem;
-        this.options = options; 
+        this.options = options;
 
         this.$form = this.$elem.find('.search-form');
-        this.$input = this.$elem.find('.search-inputbox');        
-        this.$layer = this.$elem.find('.search-layer');  
+        this.$input = this.$elem.find('.search-inputbox');
+        this.$layer = this.$elem.find('.search-layer');
+        this.$elem.on('click', '.search-btn', $.proxy(this.submit, this));
+        if (this.options.autocomplete) {
+            this.autocomplete();
+        }
 
-
-        this.$elem.on('click','.search-btn', $.proxy(this.submit, this));
-        
     }
     Search.DEFAULTS = {
         autocomplete: false,
@@ -103,46 +104,85 @@
         css3: false,
         js: false,
         animation: 'fade'
-        
+
     };
     Search.prototype.submit = function() {
-        if ($.trim(this.$input.val()) === '') {
+        if (this.getInputVal() === '') {
             return false;
         }
         this.$form.submit();
     };
     Search.prototype.autocomplete = function() {
-        
+
+
+        this.$input
+            .on('input', $.proxy(this.getData, this))
+            .on('focus', $.proxy(this.showLayer, this))
+            .on('click', function() {
+                return false;
+            });
+        this.$layer.showHide(this.options);
+
+
+        $(document).on('click', $.proxy(this.hideLayer, this));
+
+
+
     };
     Search.prototype.getData = function() {
-       
+        var self = this;
+        console.log(this.options.url + this.getInputVal());
+        $.ajax({
+            url: this.options.url + this.getInputVal(),
+            dataType: 'jsonp'
+        }).done(function(data) {            
+            self.$elem.trigger('search-getData', [data, self.$layer]);
+        }).fail(function() {
+            self.$elem.trigger('search-noData', [self.$layer]);
+        }).always(function() {
+
+        });
+
     };
     Search.prototype.showLayer = function() {
-        
+        if (this.$layer.children().length === 0) return;
+        this.$layer.showHide('show');
     };
     Search.prototype.hideLayer = function() {
-        
+        this.$layer.showHide('hide');
     };
-   
 
-  
+    Search.prototype.getInputVal = function() {
+        return $.trim(this.$input.val());
+    };
+
+    Search.prototype.setInputVal = function(val) {
+        this.$input.val(removeHtmlTags(val));
+
+        function removeHtmlTags(str) {
+            return str.replace(/<(?:[^>'"]|"[^"]*"|'[^']*')*>/g, '');
+        }
+    };
+
+
+
     $.fn.extend({
-        search: function(option) {
+        search: function(option,value) {
 
-            
-            return this.each( function() {
-                
-                var $this=$(this),
-                search=$this.data('search'),
-                options = $.extend({}, Search.DEFAULTS, $(this).data(), typeof option==='object'&&option);
-                  
-                if(!search){
-                    $this.data('search',search=new Search($this,options));
 
-                }  
+            return this.each(function() {
 
-                if(typeof search[option]==='function'){
-                    search[option]();
+                var $this = $(this),
+                    search = $this.data('search'),
+                    options = $.extend({}, Search.DEFAULTS, $(this).data(), typeof option === 'object' && option);
+
+                if (!search) {
+                    $this.data('search', search = new Search($this, options));
+
+                }
+
+                if (typeof search[option] === 'function') {
+                    search[option](value);
 
                 }
 
