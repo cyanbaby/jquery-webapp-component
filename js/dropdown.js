@@ -2,8 +2,9 @@
     'use strict'
 
     function Dropdown(elem, options) {
-        this.$elem = $(elem),
-        this.$layer = this.$elem.find('.dropdown-layer'),
+        this.$elem = $(elem);
+        this.options = options;
+        this.$layer = this.$elem.find('.dropdown-layer');
         this.activeClass = options.active + '-active';
         this.$layer.showHide(options);
         
@@ -17,22 +18,50 @@
 
 
 
-        this.$elem.hover($.proxy(this.show,this),$.proxy(this.hide,this));
+        var self = this;
+
+        if (options.event === 'click') {
+            this.$elem.on('click', function(e) {
+                self.show();
+                e.stopPropagation();
+            });
+            $(document).on('click', $.proxy(this.hide, this));
+
+        } else {
+            this.$elem.hover($.proxy(this.show, this), $.proxy(this.hide, this));
+        }
     }
 
     Dropdown.DEFAULTS = {
-        css3: true,
-        js: true,
+        event: 'hover',
+        css3: false,
+        js: false,
         animation: 'fade',
+        delay: 0,
         active:'dropdown'
     };
 
     Dropdown.prototype.show = function() {
-        this.$elem.addClass(this.activeClass);
-        this.$layer.showHide('show');
+        var self = this;
+        if (this.options.delay) {
+            this.timer = setTimeout(function() {
+                _show();
+            }, this.options.delay);
+        } else {
+            _show();
+        }
+
+        function _show() {
+            self.$elem.addClass(self.activeClass);
+            self.$layer.showHide('show');
+        }
     }
 
     Dropdown.prototype.hide = function() {
+        if(this.options.delay){
+            clearTimeout(this.timer);
+
+        }
         this.$elem.removeClass(this.activeClass);
         this.$layer.showHide('hide');
     }

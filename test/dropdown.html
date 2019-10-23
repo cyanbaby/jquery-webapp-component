@@ -189,12 +189,27 @@
     </div> -->
 
     <div class="menu dropdown fl" data-active="menu">
-        <a class="dropdown-toggle">我的慕淘<i class="dropdown-arrow icon transition">&#xe609;</i></a>
+        <a href="javascript:;" class="dropdown-toggle">我的慕淘<i class="dropdown-arrow icon transition">&#xe609;</i></a>
         <ul class="dropdown-layer dropdown-left">
             <li><a href="###" target="_blank" class="menu-item">已买到的宝贝</a></li>
             <li><a href="###" target="_blank" class="menu-item">我的足迹</a></li>
         </ul>
     </div>
+    <div class="menu dropdown fl" data-active="menu">
+        <a href="javascript:;" class="dropdown-toggle">我的慕淘22<i class="dropdown-arrow icon transition">&#xe609;</i></a>
+        <ul class="dropdown-layer dropdown-left">
+            <li><a href="###" target="_blank" class="menu-item">已买到的宝贝22</a></li>
+            <li><a href="###" target="_blank" class="menu-item">我的足迹22</a></li>
+        </ul>
+    </div>
+    <div class="menu dropdown fl" data-active="menu">
+        <a href="javascript:;" class="dropdown-toggle">我的慕淘33<i class="dropdown-arrow icon transition">&#xe609;</i></a>
+        <ul class="dropdown-layer dropdown-left">
+            <li><a href="###" target="_blank" class="menu-item">已买到的宝贝33</a></li>
+            <li><a href="###" target="_blank" class="menu-item">我的足迹33</a></li>
+        </ul>
+    </div>
+
     <script src="../js/jquery.js"></script>
     <script src="../js/transition.js"></script>
     <script src="../js/showHide.js"></script>
@@ -259,8 +274,10 @@
 
 
     $('.dropdown').dropdown({
+            event:'clicka',
+            delay: 0,
             css3: true,
-            js: true,
+            js: false,
             animation: 'slideUpDown'
 
         }); 
