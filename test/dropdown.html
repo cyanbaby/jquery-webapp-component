@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="../css/base.css" />
 
     <style type="text/css">
+    body{
+        background-color: gray;
+    }
     .dropdown {
         position: relative;
     }
@@ -195,20 +198,26 @@
             <li><a href="###" target="_blank" class="menu-item">我的足迹</a></li>
         </ul>
     </div>
-    <div class="menu dropdown fl" data-active="menu">
-        <a href="javascript:;" class="dropdown-toggle">我的慕淘22<i class="dropdown-arrow icon transition">&#xe609;</i></a>
+
+    <!--  <div class="menu dropdown fl" data-active="menu">
+        <a href="javascript:;" class="dropdown-toggle">我的慕淘2<i class="dropdown-arrow icon transition">&#xe609;</i></a>
         <ul class="dropdown-layer dropdown-left">
-            <li><a href="###" target="_blank" class="menu-item">已买到的宝贝22</a></li>
-            <li><a href="###" target="_blank" class="menu-item">我的足迹22</a></li>
+            <li><a href="###" target="_blank" class="menu-item">已买到的宝贝2</a></li>
+            <li><a href="###" target="_blank" class="menu-item">我的足迹2</a></li>
         </ul>
     </div>
-    <div class="menu dropdown fl" data-active="menu">
-        <a href="javascript:;" class="dropdown-toggle">我的慕淘33<i class="dropdown-arrow icon transition">&#xe609;</i></a>
+
+
+     <div class="menu dropdown fl" data-active="menu">
+        <a href="javascript:;" class="dropdown-toggle">我的慕淘3<i class="dropdown-arrow icon transition">&#xe609;</i></a>
         <ul class="dropdown-layer dropdown-left">
-            <li><a href="###" target="_blank" class="menu-item">已买到的宝贝33</a></li>
-            <li><a href="###" target="_blank" class="menu-item">我的足迹33</a></li>
+            <li><a href="###" target="_blank" class="menu-item">已买到的宝贝3</a></li>
+            <li><a href="###" target="_blank" class="menu-item">我的足迹3</a></li>
         </ul>
-    </div>
+    </div> -->
+
+    <button id='btn-show'>点我显示</button>
+    <button id='btn-hide'>点我隐藏</button>
 
     <script src="../js/jquery.js"></script>
     <script src="../js/transition.js"></script>
@@ -271,16 +280,30 @@
     // });
 
     // $('.dropdown').dropdown(); // 插件为了更好的调用
-
+      $('.dropdown').on('dropdown-show dropdown-shown dropdown-hide dropdown-hidden',function (e) {
+          console.log(e.type);
+          
+      })
 
     $('.dropdown').dropdown({
-            event:'clicka',
-            delay: 0,
+            event:'hover',
+            delay:0,
             css3: true,
-            js: false,
-            animation: 'slideUpDown'
+            js: true,
+            animation: 'slideLeftRight'
+            // active:'menu'
 
-        }); 
+        });
+
+    $('#btn-show').on('click',function(){
+        $('.dropdown').dropdown('show');
+
+    });
+
+    $('#btn-hide').on('click',function(){
+        $('.dropdown').dropdown('hide');
+
+    });
 
     </script>
 </body>

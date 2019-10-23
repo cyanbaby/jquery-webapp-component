@@ -1,13 +1,18 @@
 (function($) {
     'use strict'
 
-    function Dropdown(elem, options) {
-        this.$elem = $(elem);
-        this.options = options;
-        this.$layer = this.$elem.find('.dropdown-layer');
-        this.activeClass = options.active + '-active';
-        this.$layer.showHide(options);
-        
+    function Dropdown($elem, options) {
+        this.$elem = $elem;
+            this.options = options;
+        this.$layer = this.$elem.find('.dropdown-layer'),
+            this.activeClass = options.active + '-active';
+        // this.$layer.showHide(options);
+        // var self=this;
+        // this.$layer.on('show shown hide hidden',function (e) {
+        //     self.$elem.trigger('dropdown-'+e.type);
+            // console.log(e.type);
+        // });
+
         //this.$elem.hover(this.show, this.hide);注意this的指向问题修改如下
         // var self=this;
         // this.$elem.hover(function () {
@@ -16,11 +21,40 @@
         //     self.hide();
         // });
 
+        // var self = this;
 
+        // if (options.event === 'click') {
+        //     this.$elem.on('click', function(e) {
+        //         self.show();
+        //         e.stopPropagation();
+        //     });
+        //     $(document).on('click', $.proxy(this.hide, this));
 
-        var self = this;
+        // } else {
+        //     this.$elem.hover($.proxy(this.show, this), $.proxy(this.hide, this));
 
-        if (options.event === 'click') {
+        // }
+
+        this._init();
+    }
+
+    Dropdown.DEFAULTS = {
+        event: "hover",
+        css3: true,
+        js: true,
+        animation: 'fade',
+        delay: 1000,
+        active: 'dropdown'
+    };
+    Dropdown.prototype._init=function () {
+        var self=this;
+        this.$layer.showHide(this.options);       
+        this.$layer.on('show shown hide hidden',function (e) {
+            self.$elem.trigger('dropdown-'+e.type);
+            
+        });
+
+        if (this.options.event === 'click') {
             this.$elem.on('click', function(e) {
                 self.show();
                 e.stopPropagation();
@@ -29,18 +63,15 @@
 
         } else {
             this.$elem.hover($.proxy(this.show, this), $.proxy(this.hide, this));
+
         }
     }
 
-    Dropdown.DEFAULTS = {
-        event: 'hover',
-        css3: false,
-        js: false,
-        animation: 'fade',
-        delay: 0,
-        active:'dropdown'
-    };
 
+
+    //作业部分代码修改
+    // this.$elem.addClass(this.activeClass);
+    //     this.$layer.showHide('show');
     Dropdown.prototype.show = function() {
         var self = this;
         if (this.options.delay) {
@@ -55,6 +86,7 @@
             self.$elem.addClass(self.activeClass);
             self.$layer.showHide('show');
         }
+
     }
 
     Dropdown.prototype.hide = function() {
@@ -107,12 +139,21 @@
 
     $.fn.extend({
         dropdown: function(option) {
-            return this.each(function() {                
+            return this.each(function() {
                 
-                var options = $.extend({}, Dropdown.DEFAULTS,$(this).data(),option);
-                // dropdown(this, options);                
+                var $this=$(this),
+                dropdown=$this.data('dropdown'),
+                options = $.extend({}, Dropdown.DEFAULTS, $(this).data(), typeof option==='object'&&option);
+                // dropdown(this, options);  
+                if(!dropdown){//解决多次调用dropdown问题
+                    $this.data('dropdown',dropdown=new Dropdown($this,options));
 
-                new Dropdown(this,options);
+                }  
+
+                if(typeof dropdown[option]==='function'){
+                    dropdown[option]();
+
+                }
 
             });
 

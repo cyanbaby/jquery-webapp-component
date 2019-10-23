@@ -18,7 +18,7 @@
     function show($elem, callback) {
         if ($elem.data('status') === 'show') return;
         if ($elem.data('status') === 'shown') return;
-        $elem.data('status', 'show').trigger('show');
+        $elem.data('status','show').trigger('show');
         callback();
 
 
