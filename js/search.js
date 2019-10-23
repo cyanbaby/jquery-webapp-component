@@ -2,14 +2,24 @@
     'use strict';
 
     var $search = $('.search'),
+        $form = $search.find('.search-form'),
         $input = $search.find('.search-inputbox'),
         $btn = $search.find('.search-btn'),
         $layer = $search.find('.search-layer');
 
-    // 验证
-    $btn.on('click', function() {
 
-    	console.log(1);
+    // 验证
+    // $btn.on('click', function() {
+
+    //     console.log(1);
+    //     if ($.trim($input.val()) === '') {
+    //         return false;
+    //     }
+    // });
+    
+
+    $form.on('submit', function() {
+        
         if ($.trim($input.val()) === '') {
             return false;
         }
@@ -36,11 +46,46 @@
                 html += '<li class="search-layer-item text-ellipsis">' + data['result'][i][0] + '</li>';
             }
             $layer.html(html).show();
+
         }).fail(function() {
             $layer.hide().html('');
         }).always(function() {
             console.log('why always me!');
         });
     });
+
+    $layer.on('click', '.search-layer-item', function() {
+        $input.val(removeHtmlTags($(this).html()));
+        // $input.val($(this).text());
+        // console.log($(this).text());
+
+        // $input.parents().submit();
+        $form.submit();
+    })
+
+    // $input.on('focus', function() {
+    //     $layer.show();
+    // }).on('click', function() {
+    //     return false;
+    // });
+     $input.on('focus', function() {
+        $layer.show();
+    }).on('click', function() {
+        return false;
+    })
+    //  .on('blur', function(e) {
+    //     // console.log(e.originalEvent.explicitOriginalTarget)
+    //     return false;
+    //     // if(e.originalEvent.explicitOriginalTarget.className==='search-layer-item text-ellipsis') return;
+    // });
+
+    
+    $(document).on('click', function() {
+        $layer.hide();
+    })
+
+    function removeHtmlTags(str) {
+        return str.replace(/<(?:[^>'"]|"[^"]*"|'[^']*')*>/g, '');
+    }
 
 })(jQuery);
