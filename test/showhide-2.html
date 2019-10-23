@@ -73,17 +73,29 @@
     // console.log(window.mt.transition.isSupport);
 
     var $box = $('#box');
-    js.fadeslideLeftRight.init($box);
+    var showHide=window.mt.showHide($box,{
+        css3:true,
+        animation:'fade'
+    });
+
+   
+    // js.fadeslideLeftRight.init($box);
     $('#btn-show').on('click', function() {
-        js.fadeslideLeftRight.show($box);
+        // js.fadeslideLeftRight.show($box);
+        showHide.show();
+       
                
           }); 
     $('#btn-hide').on('click', function() {
-         js.fadeslideLeftRight.hide($box);
+         // js.fadeslideLeftRight.hide($box);
+         showHide.hide();
+        
+         
     });
     
      $box.on('show shown hide hidden',function(e){
      	console.log(e.type);
+         
      });
 
     
