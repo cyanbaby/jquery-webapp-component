@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>下拉菜单组件</title>
     <link rel="stylesheet" href="../css/base.css" />
+
     <style type="text/css">
     .dropdown {
         position: relative;
@@ -25,6 +26,7 @@
         display: none;
         position: absolute;
         z-index: 1;
+        overflow:hidden;
     }
 
     .dropdown-left {
@@ -81,9 +83,9 @@
         /*background-image: url(../img/dropdown-arrow-active.png);*/
     }
 
-    .menu-active .dropdown-layer {
+    /*.menu-active .dropdown-layer {
         display: block;
-    }
+    }*/
 
     /* css 绘制箭头
         .icon-triangle-down{
@@ -151,6 +153,22 @@
 			-webkit-transition:all 0.5s;
 			transition:all 0.5s;
 		}
+
+        .fadeOut {
+            visibility: hidden !important;
+            opacity: 0 !important;
+        }  
+    .slideUpDownCollapse{
+        height:0 !important;
+        padding-top:0 !important;
+        padding-bottom:0 !important;
+    }  
+
+    .slideLeftRightCollapse{
+        width:0 !important;
+        padding-left:0 !important;
+        padding-right:0 !important;
+    } 
     </style>
 </head>
 
@@ -178,6 +196,8 @@
         </ul>
     </div>
     <script src="../js/jquery.js"></script>
+    <script src="../js/transition.js"></script>
+    <script src="../js/showHide.js"></script>
     <script src="../js/dropdown.js"></script>
     <script type="text/javascript">
     // -----简单写法-----
@@ -238,7 +258,12 @@
     // $('.dropdown').dropdown(); // 插件为了更好的调用
 
 
-    $('.dropdown').dropdown(); //模块封装，调用dropdown.js下的方法
+    $('.dropdown').dropdown({
+            css3: true,
+            js: true,
+            animation: 'slideUpDown'
+
+        }); 
 
     </script>
 </body>

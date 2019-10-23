@@ -1,6 +1,6 @@
 # jquery-webapp-component
 
-> 慕淘网之下拉菜单组件化--分步代码：2-11 将显示隐藏封装成模块--完善--jQ插件
+> 慕淘网之下拉菜单组件化--分步代码：3-1 用showHide改写dropdown模块
 
 ## Build Setup
 
