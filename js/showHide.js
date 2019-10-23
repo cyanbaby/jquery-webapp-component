@@ -279,70 +279,238 @@
      },
      slideLeftRight: { // 左右滚动
          init: function($elem) {
-             var styles = {};
-             styles['width'] = $elem.css('width');
-             styles['padding-left'] = $elem.css('padding-left');
-             styles['padding-right'] = $elem.css('padding-right');
-             $elem.data('styles', styles);
-             $elem.removeClass('transition');
+             // var styles = {};
+             // styles['width'] = $elem.css('width');
+             // styles['padding-left'] = $elem.css('padding-left');
+             // styles['padding-right'] = $elem.css('padding-right');
+             // $elem.data('styles', styles);
+             // $elem.removeClass('transition');
 
-             init($elem, function() {
-                 $elem.css({
-                     'width': 0,
-                     'padding-left': 0,
-                     'padding-right': 0
-                 });
+             // init($elem, function() {
+             //     $elem.css({
+             //         'width': 0,
+             //         'padding-left': 0,
+             //         'padding-right': 0
+             //     });
+             // });
+             js._customInit($elem, {
+
+                 'width': 0,
+                 'padding-left': 0,
+                 'padding-right': 0
              });
          },
          show: function($elem) {
-             var styles = $elem.data('styles');
-             show($elem, function() {
-                 $elem.show();
-                 $elem.stop().animate({
-                     'width': styles['width'],
-                     'padding-left': styles['padding-left'],
-                     'padding-right': styles['padding-right']
-                 },function(){
-                    $elem.data('status','shown').trigger('shown');
-                 });
-             });
+             // var styles = $elem.data('styles');
+             // show($elem, function() {
+             //     $elem.show();
+             //     $elem.stop().animate({
+             //         'width': styles['width'],
+             //         'padding-left': styles['padding-left'],
+             //         'padding-right': styles['padding-right']
+             //     }, function() {
+             //         $elem.data('status', 'shown').trigger('shown');
+             //     });
+             // });
+
+             js._customshow($elem);
          },
          hide: function($elem) {
-             hide($elem, function() {
-                 
-                 $elem.stop().animate({
-                     'width': 0,
-                     'padding-left': 0,
-                     'padding-right': 0
-                 },function(){
-                    $elem.hide();
-                    $elem.data('status','hidden').trigger('hidden');
-                 });
+             //     hide($elem, function() {
+
+             //         $elem.stop().animate({
+             //             'width': 0,
+             //             'padding-left': 0,
+             //             'padding-right': 0
+             //         }, function() {
+             //             $elem.hide();
+             //             $elem.data('status', 'hidden').trigger('hidden');
+             //         });
+             //     });
+             // }
+
+             js._customHide($elem, {
+                 'width': 0,
+                 'padding-left': 0,
+                 'padding-right': 0
              });
          }
      },
      fadeslideUpDown: { // 淡入淡出上下滚动
-         show: function() {
+         init: function($elem) {
+             // var styles = {};
+             // styles['opacity'] = $elem.css('opacity');
+             // styles['height'] = $elem.css('height');
+             // styles['padding-top'] = $elem.css('padding-top');
+             // styles['padding-bottom'] = $elem.css('padding-bottom');
+             // $elem.data('styles', styles);
+             // $elem.removeClass('transition');
 
+             // init($elem, function() {
+             //     $elem.css({
+             //         'opacity': 0,
+             //         'height': 0,
+             //         'padding-top': 0,
+             //         'padding-bottom': 0
+             //     });
+             // });
+
+             js._customInit($elem, {
+
+                 'opacity': 0,
+                 'height': 0,
+                 'padding-top': 0,
+                 'padding-bottom': 0
+             });
          },
-         hide: function() {
+         show: function($elem) {
+             // var styles = $elem.data('styles');
+             // show($elem, function() {
+             //     $elem.show();
+             //     $elem.stop().animate({
+             //         'opacity': styles['opacity'],
+             //         'height': styles['height'],
+             //         'padding-top': styles['padding-top'],
+             //         'padding-bottom': styles['padding-bottom']
+             //     }, function() {
+             //         $elem.data('status', 'shown').trigger('shown');
+             //     });
+             // });
 
+             js._customshow($elem);
+         },
+         hide: function($elem) {
+             //     hide($elem, function() {
+
+             //         $elem.stop().animate({
+             //             'opacity': 0,
+             //             'height': 0,
+             //             'padding-top': 0,
+             //             'padding-bottom': 0
+             //         }, function() {
+             //             $elem.hide();
+             //             $elem.data('status', 'hidden').trigger('hidden');
+             //         });
+             //     });
+             // }
+
+
+             js._customHide($elem, {
+                 'opacity': 0,
+                 'height': 0,
+                 'padding-top': 0,
+                 'padding-bottom': 0
+             });
          }
      },
      fadeslideLeftRight: { // 淡入淡出左右滚动
-         show: function() {
+         init: function($elem) {
+             // var styles = {};
+             // styles['opacity'] = $elem.css('opacity');
+             // styles['width'] = $elem.css('width');
+             // styles['padding-left'] = $elem.css('padding-left');
+             // styles['padding-right'] = $elem.css('padding-right');
+             // $elem.data('styles', styles);
+             // $elem.removeClass('transition');
 
+             // init($elem, function() {
+             //     $elem.css({
+             //         'opacity': 0,
+             //         'width': 0,
+             // 'padding-left': 0,
+             // 'padding-right': 0
+             //     });
+             // });
+
+             js._customInit($elem, {
+
+                 'opacity': 0,
+                 'width': 0,
+                 'padding-left': 0,
+                 'padding-right': 0
+             });
          },
-         hide: function() {
+         show: function($elem) {
+             // var styles = $elem.data('styles');
+             // show($elem, function() {
+             //     $elem.show();
+             //     $elem.stop().animate({
+             //         'opacity': styles['opacity'],
+             //         'width': styles['width'],
+             //         'padding-left': styles['padding-left'],
+             //         'padding-right': styles['padding-right']
+             //     }, function() {
+             //         $elem.data('status', 'shown').trigger('shown');
+             //     });
+             // });
 
+             js._customshow($elem);
+         },
+         hide: function($elem) {
+             //     hide($elem, function() {
+
+             //         $elem.stop().animate({
+             //             'opacity': 0,
+             //         'width': 0,
+             // 'padding-left': 0,
+             // 'padding-right': 0
+             //         }, function() {
+             //             $elem.hide();
+             //             $elem.data('status', 'hidden').trigger('hidden');
+             //         });
+             //     });
+             // }
+
+
+             js._customHide($elem, {
+                 'opacity': 0,
+                 'width': 0,
+                 'padding-left': 0,
+                 'padding-right': 0
+             });
          }
      }
  };
 
- js._init = function($elem) {
+ js._init = function($elem, hiddenCallback) {
      $elem.removeClass('transition'); // js和transition动画冲突，在执行js前，将transition去掉，屏蔽风险。
-     init($elem);
+     init($elem, hiddenCallback);
  };
+
+ js._customInit = function($elem, options) {
+     var styles = {};
+     for (var p in options) {
+         styles[p] = $elem.css(p);
+     }
+
+     $elem.data('styles', styles);
+
+     js._init($elem, function() {
+         $elem.css(options);
+     });
+
+ };
+
+ js._customshow = function($elem) {
+     var styles = $elem.data('styles');
+     show($elem, function() {
+         $elem.show();
+         $elem.stop().animate($elem.data('styles'), function() {
+             $elem.data('status', 'shown').trigger('shown');
+         });
+     });
+ };
+
+ js._customHide = function($elem, options) {
+     hide($elem, function() {
+
+         $elem.stop().animate(options, function() {
+             $elem.hide();
+             $elem.data('status', 'hidden').trigger('hidden');
+         });
+     });
+ };
+
 
  js._show = function($elem, mode) {
      show($elem, function() {
