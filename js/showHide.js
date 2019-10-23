@@ -60,7 +60,7 @@
         show: function($elem) {
             show($elem, function() {
                 $elem.show();
-                $elem.data('status','shown').trigger('shown');
+                $elem.data('status', 'shown').trigger('shown');
             });
 
 
@@ -539,7 +539,7 @@
 
     function showHide($elem, options) {
         var mode = null;
-        options = $.extend({}, defaults, options);
+        // options = $.extend({}, defaults, options);
         if (options.css3 && transition.isSupport) { //css3 transition
             // css3[options.animation].init($elem);
             mode = css3[options.animation] || css3[defaults.animation];
@@ -571,9 +571,27 @@
             hide: $.proxy(mode.hide, this, $elem),
         };
     }
+    
+    $.fn.extend({
+        showHide: function (option) {
+            return this.each(function () {
+                var $this = $(this),
+                    options = $.extend({}, defaults, typeof option === 'object' && option),
+                    mode = $this.data('showHide');
 
-   
-    window.mt = window.mt || {};
-    window.mt.showHide = showHide;
+                if (!mode) {
+                    $this.data('showHide', mode = showHide($this, options));
+                }
+
+                if (typeof mode[option] === 'function') {
+                    mode[option]();
+                }
+            });
+        }
+    });
+
+
+    // window.mt = window.mt || {};
+    // window.mt.showHide = showHide;
 
 })(jQuery);
