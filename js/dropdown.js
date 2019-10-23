@@ -43,7 +43,7 @@
         css3: true,
         js: true,
         animation: 'fade',
-        delay: 1000,
+        delay: 0,
         active: 'dropdown'
     };
     Dropdown.prototype._init=function () {

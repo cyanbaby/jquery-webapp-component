@@ -1,36 +1,32 @@
-// 第一中方法
-// $('.dropdown').hover(function(){
-// 	var $dropdown=$(this);
-// 	$dropdown.find('.dropdown-toggle').css({
-// 		'background-color':'#fff',
-// 		'border-color':'#cdd0d4'
-// 	});
-// 	$dropdown.find('.dropdown-arrow').css({
-// 		'background-image':'url(img/dropdown-arrow-active.png)'
-// 	});
-// 	$dropdown.find('.dropdown-layer').show();
-// },function(){
-//     var $dropdown=$(this);
-// 	$dropdown.find('.dropdown-toggle').css({
-// 		'background-color':'',
-// 		'border-color':'#f3f5f7'
-// 	});
-// 	$dropdown.find('.dropdown-arrow').css({
-// 		'background-image':'url(img/dropdown-arrow-active.png)'
-// 	});
-// 	$dropdown.find('.dropdown-layer').hide();
-// });
+(function ($) {
+
+$(".dropdown").dropdown({
+        css3: true,
+        js: false
+        
+});
 
 
-// 第二种方法
-// $('.dropdown').hover(function(){
-// 	$(this).addClass('dropdown-active');
-// },function(){
-//     $(this).removeClass('dropdown-active');
-// });
+$('.dropdown').on('dropdown-show', function (e) {
+            var $this = $(this),
+                dataLoad = $this.data('load');
+                
+            if (!dataLoad) return;
 
-// 第三种方法，不使用js, 直接使用css中的hover实现
+            if (!$this.data('loaded')) {
+                var $layer = $this.find('.dropdown-layer'),
+                    html = '';
 
-
-//封装dropdown后引用
-$(".dropdown").dropdown();
+                $.getJSON(dataLoad, function (data) {
+                    // console.log(1);
+                    setTimeout(function () {
+                        for (var i = 0; i < data.length; i++) {
+                            html += '<li><a href="' + data[i].url + '" target="_blank" class="menu-item">' + data[i].name + '</a></li>'
+                        }
+                        $layer.html(html);
+                        $this.data('loaded', true);
+                    }, 500);
+                });
+            }
+        });
+})(jQuery);
