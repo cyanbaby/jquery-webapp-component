@@ -166,3 +166,11 @@ a.link:hover {
 /*.menu-active .dropdown-layer {
     display: block;
 }*/
+
+
+
+
+.text-hidden{
+    text-indent: -9999px;
+    overflow: hidden;
+}

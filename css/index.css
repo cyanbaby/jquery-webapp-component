@@ -93,3 +93,17 @@
 .dropdown:hover .dropdown-layer{
 	display:block;
 }*/
+
+/*header*/
+.header{
+    background-color: #f3f5f7;
+}
+.header-logo{
+	display: block;
+	width:136px;
+	height: 48px;
+	background: url(../img/header-logo.png) no-repeat;
+	margin:36px 0 0 15px;
+	text-indent: -9999px;
+	overflow: hidden;
+}
