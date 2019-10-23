@@ -1,6 +1,6 @@
 # jquery-webapp-component
 
-> 慕淘网之下拉菜单组件化--分步代码：3-1 用showHide改写dropdown模块
+> 慕淘网之下拉菜单组件化--分步代码：3-2 用构造函数的形式重写dropdown模块
 
 ## Build Setup
 
