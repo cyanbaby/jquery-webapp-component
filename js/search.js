@@ -92,6 +92,7 @@
         this.$form = this.$elem.find('.search-form');
         this.$input = this.$elem.find('.search-inputbox');
         this.$layer = this.$elem.find('.search-layer');
+        this.loaded = false;
         this.$elem.on('click', '.search-btn', $.proxy(this.submit, this));
         if (this.options.autocomplete) {
             this.autocomplete();
@@ -103,7 +104,8 @@
         url: 'https://suggest.taobao.com/sug?code=utf-8&_ksTS=1484204931352_18291&callback=jsonp18292&k=1&area=c2c&bucketid=6&q=',
         css3: false,
         js: false,
-        animation: 'fade'
+        animation: 'fade',
+        getDataInterval: 200
 
     };
     Search.prototype.submit = function() {
@@ -113,14 +115,26 @@
         this.$form.submit();
     };
     Search.prototype.autocomplete = function() {
-
-
+        var timer = null,
+            self = this;
         this.$input
-            .on('input', $.proxy(this.getData, this))
+            .on('input', function() {
+                if (self.options.getDataInterval) {
+
+                    clearTimeout(timer);
+                    timer = setTimeout(function() {
+                        self.getData();
+                    }, self.options.getDataInterval);
+                } else {
+                    self.getData();
+                }
+
+            })
             .on('focus', $.proxy(this.showLayer, this))
             .on('click', function() {
                 return false;
             });
+
         this.$layer.showHide(this.options);
 
 
@@ -129,23 +143,28 @@
 
 
     };
+
     Search.prototype.getData = function() {
         var self = this;
-        console.log(this.options.url + this.getInputVal());
-        $.ajax({
-            url: this.options.url + this.getInputVal(),
+        var inputVal = this.getInputVal();
+        if (inputVal == '') return self.$elem.trigger('search-noData');
+        if (this.jqXHR) this.jqXHR.abort();
+        this.jqXHR = $.ajax({
+            url: this.options.url + inputVal,
             dataType: 'jsonp'
-        }).done(function(data) {            
-            self.$elem.trigger('search-getData', [data, self.$layer]);
+        }).done(function(data) {
+            console.log(data);
+            self.$elem.trigger('search-getData', [data]);
         }).fail(function() {
-            self.$elem.trigger('search-noData', [self.$layer]);
+            self.$elem.trigger('search-noData');
         }).always(function() {
-
+            self.jqXHR = null;
         });
 
     };
     Search.prototype.showLayer = function() {
-        if (this.$layer.children().length === 0) return;
+        if (!this.loaded) return;
+        // if (this.$layer.children().length === 0) return;
         this.$layer.showHide('show');
     };
     Search.prototype.hideLayer = function() {
@@ -164,10 +183,15 @@
         }
     };
 
+    Search.prototype.appendLayer = function(html) {
+        this.$layer.html(html);
+        this.loaded = !!html;
+    };
+
 
 
     $.fn.extend({
-        search: function(option,value) {
+        search: function(option, value) {
 
 
             return this.each(function() {
