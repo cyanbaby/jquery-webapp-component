@@ -1,6 +1,6 @@
 # jquery-webapp-component
 
-> 慕淘网之搜索功能组件化--分步代码：1-1 logo的结构和样式
+> 慕淘网之搜索功能组件化--分步代码：1-2 搜索框的html结构
 
 ## Build Setup
 
