@@ -83,7 +83,34 @@
 (function($) {
     'use strict';
 
+     var cache = {
+        data: {},
+        count: 0,
+        addData: function (key, data) {
+            if (!this.data[key]) {
+                this.data[key] = data;
+                this.count++;
+            }
+        },
+        readData: function (key) {
+            return this.data[key];
+        },
+        deleteDataByKey: function (key) {
+            delete this.data[key];
+            this.count--;
+        },
+        deleteDataByOrder: function (num) {
+            var count = 0;
 
+            for (var p in this.data) {
+                if (count >= num) {
+                    break;
+                }
+                count++;
+                this.deleteDataByKey(p);
+            }
+        }
+    };
 
     function Search($elem, options) {
         this.$elem = $elem;
@@ -136,24 +163,23 @@
             });
 
         this.$layer.showHide(this.options);
-
-
         $(document).on('click', $.proxy(this.hideLayer, this));
-
-
-
     };
 
     Search.prototype.getData = function() {
         var self = this;
         var inputVal = this.getInputVal();
         if (inputVal == '') return self.$elem.trigger('search-noData');
+        if(cache.readData(inputVal)) return self.$elem.trigger('search-getData',[cache.readData(inputVal)]);
         if (this.jqXHR) this.jqXHR.abort();
         this.jqXHR = $.ajax({
             url: this.options.url + inputVal,
             dataType: 'jsonp'
         }).done(function(data) {
             console.log(data);
+            cache.addData(inputVal, data);
+            console.log(cache.data);
+            console.log(cache.count);
             self.$elem.trigger('search-getData', [data]);
         }).fail(function() {
             self.$elem.trigger('search-noData');
