@@ -73,13 +73,13 @@
     // console.log(window.mt.transition.isSupport);
 
     var $box = $('#box');
-    css3.fadeslideLeftRight.init($box);
+    js.slideLeftRight.init($box);
     $('#btn-show').on('click', function() {
-        css3.fadeslideLeftRight.show($box);
+        js.slideLeftRight.show($box);
                
           }); 
     $('#btn-hide').on('click', function() {
-         css3.fadeslideLeftRight.hide($box);
+         js.slideLeftRight.hide($box);
     });
     
      $box.on('show shown hide hidden',function(e){

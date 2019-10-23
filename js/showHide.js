@@ -251,27 +251,74 @@
  // 带效果的显示和隐藏，js实现方法
  var js = {
      fade: { // 淡入淡出
-         show: function() {
-
+         init: function($elem) {
+             js._init($elem);
          },
-         hide: function() {
+         show: function($elem) {
+             js._show($elem, 'fadeIn');
+         },
+         hide: function($elem) {
+
+             js._hide($elem, 'fadeOut');
 
          }
      },
      slideUpDown: { // 上下滚动
-         show: function() {
+         init: function($elem) {
+             js._init($elem);
+         },
+         show: function($elem) {
+             js._show($elem, 'slideDown');
 
          },
-         hide: function() {
+         hide: function($elem) {
+
+             js._hide($elem, 'slideUp');
 
          }
      },
      slideLeftRight: { // 左右滚动
-         show: function() {
+         init: function($elem) {
+             var styles = {};
+             styles['width'] = $elem.css('width');
+             styles['padding-left'] = $elem.css('padding-left');
+             styles['padding-right'] = $elem.css('padding-right');
+             $elem.data('styles', styles);
+             $elem.removeClass('transition');
 
+             init($elem, function() {
+                 $elem.css({
+                     'width': 0,
+                     'padding-left': 0,
+                     'padding-right': 0
+                 });
+             });
          },
-         hide: function() {
-
+         show: function($elem) {
+             var styles = $elem.data('styles');
+             show($elem, function() {
+                 $elem.show();
+                 $elem.stop().animate({
+                     'width': styles['width'],
+                     'padding-left': styles['padding-left'],
+                     'padding-right': styles['padding-right']
+                 },function(){
+                    $elem.data('status','shown').trigger('shown');
+                 });
+             });
+         },
+         hide: function($elem) {
+             hide($elem, function() {
+                 
+                 $elem.stop().animate({
+                     'width': 0,
+                     'padding-left': 0,
+                     'padding-right': 0
+                 },function(){
+                    $elem.hide();
+                    $elem.data('status','hidden').trigger('hidden');
+                 });
+             });
          }
      },
      fadeslideUpDown: { // 淡入淡出上下滚动
@@ -290,4 +337,27 @@
 
          }
      }
+ };
+
+ js._init = function($elem) {
+     $elem.removeClass('transition'); // js和transition动画冲突，在执行js前，将transition去掉，屏蔽风险。
+     init($elem);
+ };
+
+ js._show = function($elem, mode) {
+     show($elem, function() {
+         $elem.stop()[mode](function() {
+             $elem.data('status', 'shown').trigger('shown');
+         });
+     });
+ };
+
+ js._hide = function($elem, mode) {
+
+     hide($elem, function() {
+         $elem.stop()[mode](function() {
+             $elem.data('status', 'hidden').trigger('hidden');
+         });
+     });
+
  };
